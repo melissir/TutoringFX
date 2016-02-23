@@ -21,6 +21,7 @@ import models.ORM;
 import models.Student;
 import models.Subject;
 import models.Tutor;
+import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  *
@@ -325,16 +326,15 @@ public class TutoringController implements Initializable {
       userTutorIds.remove(tutor.getId());
       tutorlist.getItems().remove(tutor);
       tutorlist.refresh();
+      userStudIds.clear();
+      studentlist.refresh();
+      tutorlist.getSelectionModel().clearSelection();
       
       studentlist.getSelectionModel().select(student);
       if (student != null) {
         display.setText(studentInfo(student));
-        tutorlist.getSelectionModel().clearSelection();
       }
       else {
-        userStudIds.clear();
-        tutorlist.getSelectionModel().clearSelection();
-        studentlist.refresh();
         display.setText("");
       }
     }catch(ExpectedException ex){
@@ -345,6 +345,21 @@ public class TutoringController implements Initializable {
       ex.printStackTrace(System.err);
       System.exit(1);
     }
+  }
+  
+  @FXML
+  void addSubject(){
+    System.out.println("addSubject");
+  }
+  
+  @FXML
+  void addStudent(){
+    System.out.println("addStudent");
+  }
+  
+  @FXML
+  void addTutor(){
+    System.out.println("addTutor");
   }
   
   static String reportInfo(Interaction interact, Student student, Tutor tutor){

@@ -275,6 +275,26 @@ public class TutoringController implements Initializable {
       Interaction newInteraction = new Interaction(tutor.getId(), student.getId(), "");
       ORM.store(newInteraction);
       
+      //Update visual
+      Collection<Interaction> newInteract = ORM.findAll(Interaction.class,
+        "where student_id=?", new Object[]{student.getId()});
+      userTutorIds.clear();
+      for (Interaction i : newInteract) {
+        userTutorIds.add(i.getTutor_id());
+      }
+      
+      newInteract = ORM.findAll(Interaction.class,
+        "where tutor_id=?", new Object[]{tutor.getId()});
+      userStudIds.clear();
+      for (Interaction i : newInteract) {
+        userStudIds.add(i.getStudent_id());
+      }
+      studentlist.refresh();
+      tutorlist.refresh();
+      
+      studentlist.getSelectionModel().select(student);
+      tutorlist.getSelectionModel().select(tutor);
+      
     }catch(ExpectedException ex){
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setContentText(ex.getMessage());
@@ -283,10 +303,48 @@ public class TutoringController implements Initializable {
       ex.printStackTrace(System.err);
       System.exit(1);
     }
-    studentlist.refresh();
-    tutorlist.refresh();
-    studentlist.getSelectionModel().select(student);
-    tutorlist.getSelectionModel().select(tutor);
+    
+  }
+  
+  @FXML
+  void removeTutor(){
+    Tutor tutor = tutorlist.getSelectionModel().getSelectedItem();
+    Student student = studentlist.getSelectionModel().getSelectedItem();
+    try{
+      if (tutor == null){
+        throw new ExpectedException("must select tutor to remove");
+      }
+      //remove links
+      Collection<Interaction> interact = ORM.findAll(Interaction.class, 
+        "where tutor_id=?", new Object[]{tutor.getId()});
+      for (Interaction i : interact) {
+        ORM.remove(i);
+      }
+      
+      ORM.remove(tutor);
+      userTutorIds.remove(tutor.getId());
+      tutorlist.getItems().remove(tutor);
+      tutorlist.refresh();
+      
+      studentlist.getSelectionModel().select(student);
+      if (student != null) {
+        display.setText(studentInfo(student));
+        tutorlist.getSelectionModel().clearSelection();
+      }
+      else {
+        userStudIds.clear();
+        tutorlist.getSelectionModel().clearSelection();
+        studentlist.refresh();
+        display.setText("");
+      }
+    }catch(ExpectedException ex){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setContentText(ex.getMessage());
+      alert.show();
+    }catch(Exception ex){
+      ex.printStackTrace(System.err);
+      System.exit(1);
+    }
   }
   
   static String reportInfo(Interaction interact, Student student, Tutor tutor){

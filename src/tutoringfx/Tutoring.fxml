@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- author: Melissa Rhein -->
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tutoringfx.TutoringController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clear" text="Clear" />
+                  <MenuItem mnemonicParsing="false" text="Add Subject" />
+                  <MenuItem mnemonicParsing="false" text="Add Student" />
+                  <MenuItem mnemonicParsing="false" text="Add Tutor" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Student Order">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#studentOrderName" text="by Name" />
+                  <MenuItem mnemonicParsing="false" onAction="#studentOrderEnrolled" text="by Enrollment Date" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Report">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#viewReport" text="View Report" />
+                  <MenuItem mnemonicParsing="false" onAction="#editReport" text="Edit Report" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Selection">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#linkPair" text="Link Student/Tutor" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeTutor" text="Remove Tutor" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+         <items>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="114.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ListView fx:id="studentlist" onMouseClicked="#studentSelect" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <ListView fx:id="tutorlist" onMouseClicked="#tutorSelect" prefHeight="125.0" prefWidth="299.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" text="Students" GridPane.halignment="CENTER" />
+                  <Label alignment="CENTER" text="Tutors" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
+            <TextArea fx:id="display" editable="false" prefHeight="196.0" prefWidth="598.0" />
+         </items>
+      </SplitPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Students Ordered By: " />
+            <Label fx:id="studentOrderLabel" text=". . ." />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

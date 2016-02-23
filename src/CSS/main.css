@@ -1,0 +1,19 @@
+/* 
+    Created on : Feb 21, 2016, 6:37:38 PM
+    Author     : Melissa Rhein
+*/
+.list-cell {
+    -fx-font-size: 12pt;
+}
+.list-cell:selected {
+    -fx-background-color: #aab;
+    -fx-text-fill: white;
+    -fx-font-weight:bold;
+}
+.text-area {
+    -fx-font-size: 12pt;
+}
+.menu-bar {
+    -fx-font-size: 12pt;
+}
+

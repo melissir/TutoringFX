@@ -21,7 +21,6 @@ import models.ORM;
 import models.Student;
 import models.Subject;
 import models.Tutor;
-import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  *
@@ -225,6 +224,7 @@ public class TutoringController implements Initializable {
       EditReportDialogController dialogController = fxmlLoader.getController();
       Scene scene = new Scene(fxmlLoader.getRoot());
       Stage dialogStage = new Stage();
+      dialogStage.setTitle("Edit Report");
       dialogStage.setScene(scene);
       dialogStage.initModality(Modality.APPLICATION_MODAL);
       dialogController.mainController = this;
@@ -348,18 +348,63 @@ public class TutoringController implements Initializable {
   }
   
   @FXML
-  void addSubject(){
-    System.out.println("addSubject");
+  void addSubject(Event event){
+    try{
+      URL fxml = getClass().getResource("addSubjectDialog.fxml");
+      FXMLLoader fxmlLoader = new FXMLLoader(fxml);
+      fxmlLoader.load();
+      AddSubjectDialogController dialogController = fxmlLoader.getController();
+      Scene scene = new Scene(fxmlLoader.getRoot());
+      Stage dialogStage = new Stage();
+      dialogStage.setTitle("Add Subject");
+      dialogStage.setScene(scene);
+      dialogStage.initModality(Modality.APPLICATION_MODAL);
+      dialogController.mainController = this;
+      dialogStage.show();
+    }catch(Exception ex){
+      ex.printStackTrace(System.err);
+      System.exit(1);
+    }
   }
   
   @FXML
-  void addStudent(){
-    System.out.println("addStudent");
+  void addStudent(Event event){
+    try{
+      URL fxml = getClass().getResource("addStudentDialog.fxml");
+      FXMLLoader fxmlLoader = new FXMLLoader(fxml);
+      fxmlLoader.load();
+      AddStudentDialogController dialogController = fxmlLoader.getController();
+      Scene scene = new Scene(fxmlLoader.getRoot());
+      Stage dialogStage = new Stage();
+      dialogStage.setTitle("Add Student");
+      dialogStage.setScene(scene);
+      dialogStage.initModality(Modality.APPLICATION_MODAL);
+      dialogController.mainController = this;
+      dialogStage.show();
+    }catch(Exception ex){
+      ex.printStackTrace(System.err);
+      System.exit(1);
+    }
   }
   
   @FXML
-  void addTutor(){
-    System.out.println("addTutor");
+  void addTutor(Event event){
+    try{
+      URL fxml = getClass().getResource("addTutorDialog.fxml");
+      FXMLLoader fxmlLoader = new FXMLLoader(fxml);
+      fxmlLoader.load();
+      AddTutorDialogController dialogController = fxmlLoader.getController();
+      Scene scene = new Scene(fxmlLoader.getRoot());
+      Stage dialogStage = new Stage();
+      dialogStage.setTitle("Add Tutor");
+      dialogStage.setScene(scene);
+      dialogStage.initModality(Modality.APPLICATION_MODAL);
+      dialogController.mainController = this;
+      dialogStage.show();
+    }catch(Exception ex){
+      ex.printStackTrace(System.err);
+      System.exit(1);
+    }
   }
   
   static String reportInfo(Interaction interact, Student student, Tutor tutor){

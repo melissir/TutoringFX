@@ -16,9 +16,9 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#clear" text="Clear" />
-                  <MenuItem mnemonicParsing="false" text="Add Subject" />
-                  <MenuItem mnemonicParsing="false" text="Add Student" />
-                  <MenuItem mnemonicParsing="false" text="Add Tutor" />
+                  <MenuItem mnemonicParsing="false" onAction="#addSubject" text="Add Subject" />
+                  <MenuItem mnemonicParsing="false" onAction="#addStudent" text="Add Student" />
+                  <MenuItem mnemonicParsing="false" onAction="#addTutor" text="Add Tutor" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Student Order">
